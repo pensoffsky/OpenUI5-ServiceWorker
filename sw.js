@@ -6,11 +6,8 @@ var urlsToCache = [
   '/dist/resources/sap/ui/core/themes/sap_hcb/library.css',
   '/dist/resources/sap/m/themes/sap_hcb/library.css',
   '/dist/resources/sap/ui/core/themes/base/fonts/SAP-icons.ttf'
-  // '/view/Main.view.xml',
-  // '/view/Main.controller.js',
-  // '/view/AnimatedSprite.js',
-  // '/view/AnimatedSpriteRenderer.js',
-  // '/view/sprite.png'
+  '/dist/resources/sap/ui/thirdparty/unorm.js', //needed for safari
+  '/dist/resources/sap/ui/thirdparty/unormdata.js' //needed for safari
 ];
 
 self.addEventListener('install', function(event) {
