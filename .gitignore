@@ -8,7 +8,6 @@
 .DS_Store
 
 # Ignore local ui5 resources folder
-/dist
 
 # Ignore node modules installed by npm install
 /node_modules
