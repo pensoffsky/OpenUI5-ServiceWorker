@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="UTF-8">    
+    
+
+      <script>
+      //check if serviceWorker feature is supported by browser
+      //if so register the sw.js as serviceWorker
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').then(function(registration) {
+          // Registration was successful
+          console.log('ServiceWorker registration successful with scope: ',    registration.scope);
+        }).catch(function(err) {
+          // registration failed :(
+          console.log('ServiceWorker registration failed: ', err);
+        });
+      }
+      </script>
+      
+      
+      <script id="sap-ui-bootstrap"
+        src="dist/resources/sap-ui-custom.js"
+        data-sap-ui-libs="sap.m"
+        data-sap-ui-theme="sap_hcb"
+        data-sap-ui-bindingSyntax="complex"
+        data-sap-ui-compatVersion="edge"
+        data-sap-ui-xx-supportedLanguages="de"
+        data-sap-ui-preload="async"></script>
+      
+      
+    <script>
+        sap.ui.getCore().attachInit(function() {
+          sap.ui.require([], function(HTML) {
+            sap.ui.getCore().getLibraryResourceBundle();
+            // no sync requests!
+                // create a mobile app and display page1 initially
+    			var app = new sap.m.App("myApp", {
+    				initialPage: "page1"
+    			});
+    			// create the first page
+    			var page1 = new sap.m.Page("page1", {
+    				title : "Hello World",
+    				showNavButton : false,
+    				content : new sap.m.Button({
+    					text : "Go to Page 2",
+    					press : function () {
+    						// navigate to page2
+    						app.to("page2");
+    					}
+    				})
+    			});
+    			// create the second page with a back button
+    			var page2 = new sap.m.Page("page2", {
+    				title : "Hello Page 2",
+    				showNavButton : true,
+    				navButtonPress : function () {
+    					// go back to the previous page
+    					app.back();
+    				}
+    			});
+    			// add both pages to the app
+    			app.addPage(page1).addPage(page2);
+    			// place the app into the HTML document
+    			app.placeAt("content");
+          });
+        });
+    </script>
+  </head>
+  <body class="sapUiBody" id="content"></body>
+</html>
