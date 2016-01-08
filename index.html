@@ -10,6 +10,7 @@
       //function that gets called when the UI5 resources were loaded
       //and the "app" can be created
       fUI5Loaded = function(){
+         
             sap.ui.getCore().attachInit(function() {
               sap.ui.require([], function(HTML) {
                 sap.ui.getCore().getLibraryResourceBundle();
@@ -41,6 +42,10 @@
                   });
                   // add both pages to the app
                   app.addPage(page1).addPage(page2);
+                  
+                   //remove the loading indicator div
+                  document.getElementById("loadingIndicator").remove();
+                  
                   // place the app into the HTML document
                   app.placeAt("content");
               });
@@ -97,5 +102,7 @@
         
       </script>
   </head>
-  <body class="sapUiBody" id="content"></body>
+  <body class="sapUiBody" id="content">
+  <div id="loadingIndicator">Loading...</div>
+    </body>
 </html>
