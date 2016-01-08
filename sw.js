@@ -5,7 +5,7 @@ var urlsToCache = [
   '/dist/resources/sap/m/library-preload.json',
   '/dist/resources/sap/ui/core/themes/sap_hcb/library.css',
   '/dist/resources/sap/m/themes/sap_hcb/library.css',
-  '/dist/resources/sap/ui/core/themes/base/fonts/SAP-icons.ttf'
+  '/dist/resources/sap/ui/core/themes/base/fonts/SAP-icons.ttf',
   '/dist/resources/sap/ui/thirdparty/unorm.js', //needed for safari
   '/dist/resources/sap/ui/thirdparty/unormdata.js' //needed for safari
 ];
