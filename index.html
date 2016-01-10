@@ -6,11 +6,37 @@
     
       <script>
       
+      fLoadingIndicatorStart = function (sText) {
+          var loadingIndicator = document.getElementById("loadingIndicator");
+          if(loadingIndicator) {
+              loadingIndicator.textContent = sText;      
+          }
+          nLoadingIndicatorInterval = window.setInterval(function (argument) {
+              var loadingIndicator = document.getElementById("loadingIndicator");
+              if(loadingIndicator) {
+                  loadingIndicator.textContent += ".";
+              }
+          }, 1000);
+      };
+      
+      fLoadingIndicatorText = function (sText) {
+          var loadingIndicator = document.getElementById("loadingIndicator");
+          if(loadingIndicator) {
+              loadingIndicator.textContent = sText;      
+          }
+      };
+      
+      fLoadingIndicatorRemove = function () {
+          window.clearInterval(nLoadingIndicatorInterval);
+          var loadingIndicator = document.getElementById("loadingIndicator");
+          if(loadingIndicator) {
+              loadingIndicator.textContent.remove();
+          }
+      };
       
       //function that gets called when the UI5 resources were loaded
       //and the "app" can be created
       fUI5Loaded = function(){
-         
             sap.ui.getCore().attachInit(function() {
               sap.ui.require([], function(HTML) {
                 sap.ui.getCore().getLibraryResourceBundle();
@@ -55,6 +81,7 @@
       
       //function that adds the UI5 bootstrap script tag to the document
       fLoadUI5 = function(){
+          fLoadingIndicatorText("Loading UI5 resources...");
           var s, r, t;
           r = false;
           s = document.createElement('script');
@@ -71,12 +98,18 @@
               console.log( this.readyState ); //uncomment this line to see which ready states are called.  
               if (!r && (!this.readyState || this.readyState == 'complete')) {
                   r = true;
+                  //change loading indicator text
+                  document.getElementById("loadingIndicator").textContent = "Initializing UI5...";
                   fUI5Loaded();
               }
           };
           t = document.getElementsByTagName('script')[0];
           t.parentElement.insertBefore(s, t);
       };
+      
+      document.addEventListener("DOMContentLoaded", function(event) { 
+        fLoadingIndicatorStart("Loading...");
+      });
       
       //check if serviceWorker feature is supported by browser
       //if so register the sw.js as serviceWorker
@@ -97,12 +130,9 @@
         fLoadUI5();
     }
         
-        
-        
-        
       </script>
   </head>
   <body class="sapUiBody" id="content">
-  <div id="loadingIndicator">Loading...</div>
+  <div id="loadingIndicator" style="font-size:4rem;"></div>
     </body>
 </html>
