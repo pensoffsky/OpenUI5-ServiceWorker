@@ -27,11 +27,11 @@ self.addEventListener('fetch', function(event) {
       .then(function(response) {
         // Cache hit - return response
         if (response) {
-          console.log('ServiceWorker: NOT FOUND:' + event.request.url);
+          console.log('ServiceWorker: found:' + event.request.url);
           return response;
         }
 
-        console.log('ServiceWorker: found:' + event.request.url);
+        console.log('ServiceWorker: NOT FOUND:' + event.request.url);
         return fetch(event.request);
       }
     )

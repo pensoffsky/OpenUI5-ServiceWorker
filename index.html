@@ -41,33 +41,41 @@
               sap.ui.require([], function(HTML) {
                 sap.ui.getCore().getLibraryResourceBundle();
                 // no sync requests!
-                    // create a mobile app and display page1 initially
-                  var app = new sap.m.App("myApp", {
-                      initialPage: "page1"
-                  });
+                
+                
+                var oStockText = new sap.m.Text("idStockPrice", {text:""});
+
+                // create a mobile app
+                  var app = new sap.m.App("myApp", {});
+                  
+                  var fLoadStockPrice = function() {
+                      var sStockQuery = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22SAP%22)%0A%09%09&env=http%3A%2F%2Fdatatables.org%2Falltables.env&format=json";
+                      var oRes = jQuery.ajax(sStockQuery);
+                      oRes.done(function (a,b,c) {
+                          var sCreated = a.query.created;
+                          var sPrice = a.query.results.quote.LastTradeWithTime;
+                          var sDate = a.query.results.quote.LastTradeDate;
+                          console.log(sCreated + " " + sDate + " " + sPrice);
+                          oStockText.setText(sCreated + " " + sDate + " " + sPrice);
+                      });
+                  };
+                  
+                  //initial load of the stock price
+                  fLoadStockPrice();
+                  
                   // create the first page
                   var page1 = new sap.m.Page("page1", {
-                      title : "Hello World v01",
+                      title : "Hello World v02",
                       showNavButton : false,
-                      content : new sap.m.Button({
-                          text : "Go to Page 2",
-                          press : function () {
-                              // navigate to page2
-                              app.to("page2");
-                          }
-                      })
+                      content : [oStockText,
+                          new sap.m.Button({
+                          text : "Refresh stock price",
+                          press : fLoadStockPrice
+                      })]
                   });
-                  // create the second page with a back button
-                  var page2 = new sap.m.Page("page2", {
-                      title : "Hello Page 2",
-                      showNavButton : true,
-                      navButtonPress : function () {
-                          // go back to the previous page
-                          app.back();
-                      }
-                  });
-                  // add both pages to the app
-                  app.addPage(page1).addPage(page2);
+
+                  // add page to the app
+                  app.addPage(page1)
                   
                    //remove the loading indicator div
                   document.getElementById("loadingIndicator").remove();
