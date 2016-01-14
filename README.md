@@ -10,6 +10,9 @@ The loading of the UI5 resources was adapted from this concept:
 - Graceful Degradation
     - If the ServiceWoker API is not supported by the browser then the app will still be loaded normally: `if ('serviceWorker' in navigator) {`
 - App is available offline directly in browser
+- Based on the new [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
+- 
 
 
 http://caniuse.com/#feat=serviceworkers
+
