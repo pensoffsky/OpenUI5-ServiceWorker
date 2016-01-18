@@ -5,7 +5,7 @@ You can try it out in current Chrome, Opera or Android browsers:
 https://pensoffsky.github.io/OpenUI5-ServiceWorker/index.html
 
 ## Disclaimer
-- this concept does unfortunately not work with "normal" UI5 resources because they use sync XMLHttpRequests which are not supported by the ServiceWorker API. The project uses modified UI5 resources that load async.
+- this concept does unfortunately not work with "normal" UI5 resources because they use sync XMLHttpRequests which are not supported by the ServiceWorker API. The project uses [modified UI5 resources](https://gist.github.com/matz3/521ab104c48ca24c389d) created by [matz3](https://github.com/matz3) that load async. 
 - only https is supported by ServiceWorker because of security reasons
 - the ServiceWorker API is not yet supported in all browsers. You can check the availability [here](http://caniuse.com/#feat=serviceworkers)
 - the delayed loading of the UI5 resources was adapted from this concept:
